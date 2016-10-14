@@ -1,15 +1,15 @@
 /* HALO:R FARM
-  This sketch is made to 
+  This sketch is made to farm credits with a modified 360 controller
 */
 
 // Config for Setup
 const int A_TOGGLE = 1; // A toggle pin
 const int START_TOGGLE = 4; // START toggle pin
-const int UP_TOGGLE = 7; // D-Pad UP toggle pin
+const int D_UP_TOGGLE = 7; // D-Pad UP toggle pin
 
 const int A_TEST = 2; //A test pin
 const int START_TEST = 5; // START test pin
-const int UP_TEST = 8; // D-Pad UP test pin
+const int D_UP_TEST = 8; // D-Pad UP test pin
 
 const int PRESS_TIME = 2; // Button Press time in seconds (Multiply by 1000 in delay() use for seconds instead of miliseconds)
 
@@ -92,14 +92,60 @@ void press_start() {
 //Press A
 void press_a() {
   
+  //debug info
+  Serial.write('[DEBUG] Checking all button states');
   
+  // Check button states
+  check_button_state_all();
+  
+  if (buttonStateAll = 0) {
+    
+    //debug info
+    Serial.write('[DEBUG] Simulating Press');
+    
+    //Press A
+    digitalWrite(A_TOGGLE, HIGH);
+    delay(PRESS_TIME * 1000);
+    digitalWrite(A_TOGGLE, LOW);
+    delay(STABILITY_DELAY);
+    
+  }
+  
+  else {
+    
+    //debug info
+    Serial.write('[ERROR] Failed pressing A!');
+  }
   
 }
 
 //Press D-Pad UP
 void press_d_up() {
   
+  //debug info
+  Serial.write('[DEBUG] Checking all button states');
   
+  // Check button states
+  check_button_state_all();
+  
+  if (buttonStateAll = 0) {
+    
+    //debug info
+    Serial.write('[DEBUG] Simulating Press');
+    
+    //Press A
+    digitalWrite(D_UP_TOGGLE, HIGH);
+    delay(PRESS_TIME * 1000);
+    digitalWrite(D_UP_TOGGLE, LOW);
+    delay(STABILITY_DELAY);
+    
+  }
+  
+  else {
+    
+    //debug info
+    Serial.write('[ERROR] Failed pressing D-Pad Up!');
+  }
   
 }
 
@@ -140,20 +186,70 @@ void check_button_state_all() {
 // Check START button state function
 void check_button_state_start() {
   
+  if (START_TEST = LOW) { //if test pin is low
+    
+    buttonStateStart = 0; //set state to 0 (off)
+    
+  }
   
+  else if (START_TEST = HIGH) {
+    
+    buttonStateStart = 1;
+    
+  }
+  else {
+    
+    //debug info
+    Serial.write('[ERROR] Start State Test Error');
+    
+  }
   
 }
 
 //Check A button state function
 void check_button_state_a() {
   
+  if (A_TEST = LOW) {
+    
+    buttonStateA = 0;
+    
+  }
   
+  else if (A_TEST = HIGH) {
+    
+    buttonStateA = 1;
+    
+  }
+  
+  else {
+    
+    //debug info
+    Serial.write('[ERROR] A State Test Error');
+    
+  }
   
 }
 
 //Check D-Pad UP button state function
 void check_button_state_d_up() {
   
+  if (D_UP_TEST = LOW) {
+    
+    buttonStateDUp = 0;
+    
+  }
   
+  else if (D_UP_TEST = HIGH) {
+    
+    buttonStateDUp = 1;
+    
+  }
+  
+  else {
+    
+    //debug info
+    Serial.write('[ERROR] D-Pad Up State Test Error');
+    
+  }
   
 }
